@@ -1,0 +1,41 @@
+/* Styles for the container */
+#container {
+    margin: 20px auto;
+    width: 80%;
+  }
+  
+  /* Styles for images */
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 10px auto;
+  }
+  
+  /* Styles for videos */
+  video {
+    max-width: 100%;
+    display: block;
+    margin: 10px auto;
+  }
+  
+  /* Styles for paragraphs */
+  p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 10px 0;
+  }
+  
+  /* Styles for URLs */
+  a {
+    display: block;
+    font-size: 16px;
+    margin: 10px 0;
+    color: #007bff;
+  }
+  
+  /* Remove underline for URLs */
+  a:hover {
+    text-decoration: none;
+  }
+  

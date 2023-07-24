@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+</head>
+<body>
+    <!-- <p>Mern</p>
+    <button id="myButton">Click Me</button>
+    <script>// JavaScript function to change button color to green on click
+        function changeButtonColorToGreen() {
+          // Get the button element by its ID
+          const button = document.getElementById('myButton');
+        
+          // Change the background color to green
+          button.style.backgroundColor = 'green';
+        }
+        
+        // Attach the click event listener to the button
+        const myButton = document.getElementById('myButton');
+        myButton.addEventListener('click', changeButtonColorToGreen);
+    </script> -->
+
+
+    <ul id="myList">
+        <li>one</li>
+        <li>two</li>
+        <li>three</li>
+    </ul>
+    <input type="text" id="textInput" placeholder="Add any input"/>
+    <button onclick="addItemToList()">Add Item to List</button>
+
+    <script>// JavaScript function to add input value as an li item to the ul element
+        function addItemToList() {
+          // Get the input text field element by its ID
+          const inputElement = document.getElementById('textInput');
+        
+          // Get the ul element by its ID
+          const ulElement = document.getElementById('myList');
+        
+          // Get the value from the input text field
+          const inputValue = inputElement.value;
+        
+          if (inputValue.trim() !== '') {
+            // Create a new li element
+            const newLi = document.createElement('li');
+        
+            // Set the text content for the new li element
+            newLi.textContent = inputValue;
+        
+            // Append the new li element to the ul element
+            ulElement.appendChild(newLi);
+        
+            // Clear the input text field
+            inputElement.value = '';
+          }
+        }
+    
+    </script>
+</body>
+</html>
