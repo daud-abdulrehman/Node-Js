@@ -1,23 +1,18 @@
-const express = require('express')
-const app = express()
-const port = 3000
-const users = ["daud","mansoor","umer"]
-const adminRouter = 
+const express = require('express');
+const app = express();
+const PORT = 3000;
+const routes = require("./routes")
+ 
+// Single routing
+
+ //user = ["daud1","umar1","mansoor1"]
+ //admin = ["daud2","umar2","mansoor2"]
+
+app.use(routes);
+app.listen(PORT, function (err) {
+    if (err) console.log(err);
+    console.log("Server listening on PORT", PORT);
+});
 
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
-app.use("/api",adminRouter)
-
-app.get("/getUser/:id",(req,res)=>{
-    console.log("===================id-------------",req.params.id)
-    res.send(users[req.params.id])
-})
-
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
