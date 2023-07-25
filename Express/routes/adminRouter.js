@@ -16,3 +16,5 @@ router.delete('/deleteAdmin/:id', function (req, res) {
 })
 
 module.exports = router
+
+
