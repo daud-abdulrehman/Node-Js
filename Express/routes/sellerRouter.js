@@ -3,11 +3,6 @@ const router = express.Router();
 var jwt = require("jsonwebtoken");
 
 const registeredUsers = [];
-const userMiddleware = (req, res, next) => {
-  console.log("============ userMiddleware -----------");
-  req.params.id += 5;
-  next();
-};
 
 router.post("/signUp", function (req, res) {
   console.log("============= req.body===== ", req.body);
@@ -31,12 +26,29 @@ router.post("/signIn", function (req, res) {
   }
 });
 
-router.get("/getUsers", function (req, res) {
+router.get("/getOrders", function (req, res) {
   console.log("============= req.body===== ", req.headers.authorization);
   const token = req.headers.authorization;
   const user = jwt.verify(token, "shhhhh");
-  console.log(" =========== requesting user-------- ", user);
+  console.log(" =========== viewing orders-------- ", user);
   res.send("okay");
 });
+
+router.patch("/updateOrder",function(req,res){
+    console.log("update order route")
+})
+
+router.patch("/updateOrderStatus",function(req,res){
+    console.log("update order status route")
+})
+
+router.delete("/deleteProduct",function(req,res){
+    console.log("delete product route")
+})
+
+
+
+
+
 
 module.exports = router;

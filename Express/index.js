@@ -4,15 +4,9 @@ const PORT = 3000;
 const routes = require("./routes")
 var jwt = require("jsonwebtoken");
 
-// Single routing
-
- //user = ["daud1","umar1","mansoor1"]
- //admin = ["daud2","umar2","mansoor2"]
-
  const middleware1 = (req,res,next)=>{
     console.log("middleware1")
     req.params.id+=1
-
     next()
 }
 app.use(express.json())
@@ -72,9 +66,6 @@ app.get("/admin/getUsers", function (req, res) {
     res.send(registeredUsers);
   });
   
-
-
-
 //app.use(middleware1)
 app.use(routes);
 app.listen(PORT, function (err) {

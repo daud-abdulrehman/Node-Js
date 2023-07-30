@@ -3,11 +3,6 @@ const router = express.Router();
 var jwt = require("jsonwebtoken");
 
 const registeredUsers = [];
-const userMiddleware = (req, res, next) => {
-  console.log("============ userMiddleware -----------");
-  req.params.id += 5;
-  next();
-};
 
 router.post("/signUp", function (req, res) {
   console.log("============= req.body===== ", req.body);
@@ -31,12 +26,28 @@ router.post("/signIn", function (req, res) {
   }
 });
 
-router.get("/getUsers", function (req, res) {
+router.get("/getOrders", function (req, res) {
   console.log("============= req.body===== ", req.headers.authorization);
   const token = req.headers.authorization;
   const user = jwt.verify(token, "shhhhh");
-  console.log(" =========== requesting user-------- ", user);
+  console.log(" =========== viewing orders-------- ", user);
   res.send("okay");
 });
+
+router.patch("/addItemtoCart",function(req,res){
+    console.log("add item to cart route")
+})
+
+router.post("/placeOrder",function(req,res){
+    console.log("place order route")
+})
+
+router.get("/trackOrder",function(req,res){
+    console.log("track order route")
+})
+
+router.get("/canCheckoutViaStripe",function(req,res){
+    console.log("checkout via stripe route")
+})
 
 module.exports = router;
