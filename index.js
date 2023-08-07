@@ -1,58 +1,53 @@
-// let user = {
-//     name : "daud",
-//     address : "LHR",
+const express = require("express");
+const app = express();
+require("dotenv").config();
+const cors = require("cors");
+const port = process.env.PORT;
+var multer = require('multer')
+var upload = multer({dest:'uploads/'})
 
-//     speak: function speak(){
-//        console.log("speaking")
-//        return 2
-//     }
-// }
-
-// //console.log("=================user-------------",user.speak())
-// const speakmethod = user.speak
-// console.log("========speakmethod=======",speakmethod())
-
-//spread 
-//loadash library
+const fs = require('fs')
+const util = require('util')
+const unlinkFile = util.promisify(fs.unlink)
+const { uploadFile, getFileStream } = require('./s3')
 
 
-//day3
+const routes = require("./routes/index");
+const connectDb = require("./db/connect");
 
-// const numbers = [1,23,78,89,90]
-// const numbers2 = [...numbers]
-// console.log(numbers2)
+app.use(cors());
+app.use(express.json());
+app.use(routes);
 
-// const user = {
-//     name: "daud",
-//     address:{
-//         town:"judicial 3",
-//         street:"five"
-//     }
-// }
+connectDb();
 
-// const user2 = {...user}
-// console.log(user2)
+app.get('/images/:key', (req, res) => {
+  console.log(req.params)
+  const key = req.params.key
+  const readStream = getFileStream(key)
 
-// // object destructuring
-// let {name} = user
-// console.log("=============name===============",name)
+  readStream.pipe(res)
+})
 
+app.post('/images', upload.single('image'), async (req, res) => {
+  const file = req.file
+  console.log(file)
 
-// const {address} = user
-// console.log("=============address===============",address)
-// address.town = "eme"
-// console.log("=============address===============",address)
-// name = "mansoor"
-// console.log("==============username=========",user.name)
+  // apply filter
+  // resize 
 
-// //name is assigned by value and address is assigned by reference
-
-// //array destructuring(see at home)
+  const result = await uploadFile(file)
+  await unlinkFile(file.path)
+  console.log(result)
+  const description = req.body.description
+  res.send({imagePath: `/images/${result.Key}`})
+})
 
 
-//=============================================================DAY 5==============================================================
-//day 5(friday)
+app.get("/", (req, res) => {
+  res.send("Hello World");
+});
 
-
-
-
+app.listen(port, () => {
+  console.log(`Server is listening on Port:${port}...`);
+});
